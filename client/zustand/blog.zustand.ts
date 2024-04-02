@@ -1,4 +1,3 @@
-import { Console } from 'console';
 import { create } from 'zustand'
 
 const domain = 'http://localhost:3000'
@@ -42,7 +41,7 @@ const blogStore = (set: any): blogState => ({
     blogs: [],
     singleBlog: null,
     getAllBlogs: async () => {
-        try {
+        try { 
             const res = await fetch(`${domain}/blogs`, {
                 method: 'GET',
                 headers: {

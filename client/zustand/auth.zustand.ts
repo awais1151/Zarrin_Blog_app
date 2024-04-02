@@ -88,7 +88,7 @@ const AuthStore = (set: any): AuthState => ({
             // Parse the response as JSON
             const loginToken = await res.json();
             console.log(loginToken);
-console.log(loginToken)
+            console.log(loginToken)
             // Update the state with the received token
             set({
                 isLoggedin: true,
@@ -118,6 +118,7 @@ console.log(loginToken)
             const res = await fetch(`${domain}/auth/signup`, {
                 method: 'POST',
                 body: formData,
+
             });
 
             // Parse the response as JSON
@@ -220,7 +221,7 @@ console.log(loginToken)
                 // Parse the response as JSON
                 const updatedUserData = await res.json();
                 console.log(updatedUserData);
-                if(!res.ok){
+                if (!res.ok) {
                     throw new Error('Response is ok')
                 }
 
@@ -230,9 +231,9 @@ console.log(loginToken)
                     user: updatedUserData
                 }));
             }
-            } catch (error) {
-                console.log(error);
-            }
+        } catch (error) {
+            console.log(error);
+        }
     },
     signout: () => {
         set({

@@ -4,7 +4,7 @@ import useAuthStore from '@/zustand/auth.zustand';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import React, { FC, useEffect, useState } from 'react';
-import { Bounce, toast } from 'react-toastify';
+import {toast} from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 // Define the functional component 'Page'

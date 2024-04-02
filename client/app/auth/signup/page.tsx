@@ -6,66 +6,66 @@ import { useRouter } from 'next/navigation';
 import React, { ChangeEvent, FC, useEffect, useState } from 'react';
 // Define the functional component 'Page'
 const Page: FC = () => {
-  const router= useRouter();
-  const {isLoggedin,login} = useAuthStore();
- // State to hold signup form data
- const [signupData, setSignupData] = useState<{
-  name: string;
-  email: string;
-  password: string;
-  role: string;
-  file?: File | null;
-}>({
-  name: "",
-  email: "",
-  password: "",
-  role: "",
-  file: null,
-});
+  const router = useRouter();
+  const { isLoggedin, login } = useAuthStore();
+  // State to hold signup form data
+  const [signupData, setSignupData] = useState<{
+    name: string;
+    email: string;
+    password: string;
+    role: string;
+    file?: File | null;
+  }>({
+    name: "",
+    email: "",
+    password: "",
+    role: "",
+    file: null,
+  });
 
-// Use the useAuthStore hook to get the state and actions
-const { signUp } = useAuthStore();
+  // Use the useAuthStore hook to get the state and actions
+  const { signUp } = useAuthStore();
 
-// Handler for input change in the signup form
-const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
-  e.preventDefault();
-  setSignupData({ ...signupData, [e.target.name]: e.target.value });
-};
+  // Handler for input change in the signup form
+  const handleInputChange = (e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
+    e.preventDefault();
+    setSignupData({ ...signupData, [e.target.name]: e.target.value });
+  };
 
-// Handler for file input change for profile image
-const handleFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-  e.preventDefault();
-  const file = e.target.files && e.target.files[0];
-  console.log(file);
-  
+  // Handler for file input change for profile image
+  const handleFileInputChange = (e: ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    const file = e.target.files && e.target.files[0];
+    console.log(file);
 
-  // Check if a file is selected
-  if (file) {
+
+    // Check if a file is selected
+    if (file) {
       // Store the file in the signupData object
       setSignupData({ ...signupData, file: file });
-  }
-};
+    }
+  };
 
-useEffect(() => {
-  let isLoggedin:any = localStorage.getItem('Auth');
-  isLoggedin = JSON.parse(isLoggedin);
-  isLoggedin = isLoggedin?.state?.isLoggedin;
-  if(isLoggedin){
-    router.push('/')
-  }else{
-    router.push('/auth/signup')
-  }
-}, [])
+  useEffect(() => {
+    let isLoggedin: any = localStorage.getItem('Auth');
+    isLoggedin = JSON.parse(isLoggedin);
+    isLoggedin = isLoggedin?.state?.isLoggedin;
+    if (isLoggedin) {
+      router.push('/')
+    } else {
+      router.push('/auth/signup')
+    }
+  }, [])
 
-// Handler for form submission
-const handleSubmit = async () => {
-  try {
+  // Handler for form submission
+  const handleSubmit = async () => {
+    try {
       await Promise.all([signUp(signupData)]);
       router.push('/')
-  } catch (error) {
+    } catch (error) {
       console.log(error);
-  }
-};
+    }
+  };
 
   // JSX for the signup page
   return (
